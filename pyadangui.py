@@ -2,6 +2,7 @@ import tkinter as tk
 from customtkinter import *
 import requests
 from bs4 import BeautifulSoup
+from PIL import Image, ImageTk
 
 # BeautifulSoup variables
 response = requests.get("https://almaaref.org.lb/")
@@ -48,6 +49,11 @@ mogreb_time = get_data(mogreb_class)
 esha_time = get_data(esha_class)
 mid_night_time = get_data(mid_night_class)
 
+# image variables
+morning = CTkImage(Image.open(r"images/morning.jpg"))
+midday = CTkImage(Image.open(r"images/midday.jpg"))
+evening = CTkImage(Image.open(r"images/evening.jpg"))
+midnight = CTkImage(Image.open(r"images/midnight.jpg"))
 
 def refresh_clicked():
     pass

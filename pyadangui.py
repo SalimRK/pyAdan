@@ -4,6 +4,8 @@ import requests
 from bs4 import BeautifulSoup
 from PIL import Image, ImageTk
 
+icon_path = "images/pyadaicon.ico"
+
 # BeautifulSoup variables
 response = requests.get("https://almaaref.org.lb/")
 soup = BeautifulSoup(response.content, "html.parser")
@@ -50,6 +52,7 @@ esha_time = get_data(esha_class)
 mid_night_time = get_data(mid_night_class)
 
 # image variables
+stop_food_img = CTkImage(Image.open(r"images/stop_food.png"))
 morning_img = CTkImage(Image.open(r"images/morning.jpg"))
 midday_img = CTkImage(Image.open(r"images/midday.jpg"))
 evening_img = CTkImage(Image.open(r"images/evening.jpg"))
@@ -68,6 +71,7 @@ class MyFrame(CTkFrame):
         self.label_date_arb = CTkLabel(self, text=date_arb)
         self.label_imsak_time = CTkLabel(self, text=imsak_time)
         self.label_imsak_arb = CTkLabel(self, text=imsak_arb)
+        self.image_imsak_pray = CTkLabel(self, text="", image=stop_food_img)
         self.label_fajr_time = CTkLabel(self, text=fajr_time)
         self.label_fajr_arb = CTkLabel(self, text=fajr_arb)
         self.image_morning_pray = CTkLabel(self, text="", image=morning_img)
@@ -90,6 +94,7 @@ class MyFrame(CTkFrame):
         self.label_date_arb.grid(row=0, column=0, padx=30, pady=10, columnspan=2)
         self.label_imsak_time.grid(row=1, column=0, padx=30, pady=10)
         self.label_imsak_arb.grid(row=1, column=1, padx=30, pady=10)
+        self.image_imsak_pray.grid(row=1, column=2, padx=10)
         self.label_fajr_time.grid(row=2, column=0, padx=30, pady=10)
         self.label_fajr_arb.grid(row=2, column=1, padx=30, pady=10)
         self.image_morning_pray.grid(row=2, column=2, padx=10)
@@ -114,6 +119,7 @@ class App(CTk):
     def __init__(self):
         super().__init__()
         self.title("PyAdan")
+        self.iconbitmap(icon_path)
         self.grid_columnconfigure(0, weight=1)
 
         self.refresh_button = CTkButton(self, command=refresh_clicked(), image=refresh_img)

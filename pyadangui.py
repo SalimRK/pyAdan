@@ -120,6 +120,7 @@ class App(CTk):
         super().__init__()
         self.title("PyAdan")
         self.iconbitmap(icon_path)
+        self.geometry("600x550")
         self.grid_columnconfigure(0, weight=1)
 
         self.refresh_button = CTkButton(self, command=refresh_clicked(), image=refresh_img)

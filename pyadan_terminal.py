@@ -1,11 +1,15 @@
 import requests
 from bs4 import BeautifulSoup
+import json
 
 # Send a GET request to the website
 response = requests.get("https://almaaref.org.lb/")
 
 # Parse the HTML content using BeautifulSoup
 soup = BeautifulSoup(response.content, "html.parser")
+
+# json file path
+json_filename = "prayer_times.json"
 
 date_class = "fw-bold"
 imsak_class = "card mx-auto bg-warning text-light mb-1"
@@ -45,13 +49,39 @@ mogreb_time = get_data(mogreb_class)
 esha_time = get_data(esha_class)
 mid_night_time = get_data(mid_night_class)
 
+
+def load_data():
+    pass
+
+
+def save_data():
+    prayer_times = {
+        "date": date_arb,
+        "times": {
+            imsak_arb: imsak_time,
+            fajr_arb: fajr_time,
+            shorok_arb: shorok_time,
+            dohor_arb: dohor_time,
+            aser_arb: aser_time,
+            mogreb_arb: mogreb_time,
+            esha_arb: esha_time,
+            mid_night_arb: mid_night_time
+        }
+    }
+    with open(json_filename, "w") as file:
+        json.dump(prayer_times, file)
+        file.write('\n')
+
+
 if __name__ == '__main__':
-    print(date_arb)
-    print(imsak_arb + " : " + imsak_time)
-    print(fajr_arb + " : " + fajr_time)
-    print(shorok_arb + " : " + shorok_time)
-    print(dohor_arb + " : " + dohor_time)
-    print(aser_arb + " : " + aser_time)
-    print(mogreb_arb + " : " + mogreb_time)
-    print(esha_arb + " : " + esha_time)
-    print(mid_night_arb + " : " + mid_night_time)
+    # print(date_arb)
+    # print(imsak_arb + " : " + imsak_time)
+    # print(fajr_arb + " : " + fajr_time)
+    # print(shorok_arb + " : " + shorok_time)
+    # print(dohor_arb + " : " + dohor_time)
+    # print(aser_arb + " : " + aser_time)
+    # print(mogreb_arb + " : " + mogreb_time)
+    # print(esha_arb + " : " + esha_time)
+    # print(mid_night_arb + " : " + mid_night_time)
+    save_data()
+    save_data()
